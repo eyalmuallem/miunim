@@ -5,78 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ניהול מיונים</title>
     <style>
-    
-    .chapter {
-    text-align: center; /* ממרכז את הטקסט */
-    font-weight: bold; /* הופך את הכותרות ליותר בולטות */
-    font-size: 16px; /* התאמת גודל */
-}
-
-    .header-container {
-    display: flex;
-    justify-content: space-between; /* מיקום הלוגואים משני הצדדים */
-    align-items: center;
-    background-color: #ffffff; /* רקע בהיר תואם לעיצוב */
-    padding: 10px 20px;
-    border-bottom: 2px solid #ddd; /* קו תחתון להפרדה מהתוכן */
-}
-
-.header-container h1 {
-    margin: 0;
-    font-size: 24px; /* התאמת גודל כותרת */
-    text-align: center;
-    flex-grow: 1; /* נותן לכותרת מקום להתפרס במרכז */
-}
-
-.logo-left, .logo-right {
-    height: 50px; /* התאמת גובה הלוגואים */
-}
         body {
             font-family: Arial, sans-serif;
             direction: rtl;
             background-color: #f9f9f9;
             margin: 20px;
+            text-align: center;
         }
-        .chapter {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            cursor: pointer;
-        }
-        .sub-chapter-container {
-            display: none;
-            margin-left: 20px;
-        }
-        .sub-chapter {
-            background-color: #f1f1f1;
-            padding: 5px;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-        .description {
-            display: none;
-            margin-left: 40px;
-            color: #555;
-        }
+
+        /* עיצוב דף ההתחברות */
         #loginContainer {
             width: 300px;
             margin: 100px auto;
             padding: 20px;
-            text-align: center;
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        #loginContainer input {
+
+        input {
             width: 90%;
             padding: 8px;
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        #loginContainer button {
+
+        button {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -85,11 +41,85 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #loginContainer button:hover {
+
+        button:hover {
             background-color: #218838;
         }
-        
-        #searchBox {
+
+        #errorMessage {
+            color: red;
+            display: none;
+        }
+
+        /* עיצוב הדף הראשי */
+        #contentContainer {
+            display: none; /* מוסתר כברירת מחדל */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .header-container h1 {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .logo-left, .logo-right {
+            height: 50px;
+        }
+
+        .chapter {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .sub-chapter-container {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .sub-chapter {
+            background-color: #f1f1f1;
+            padding: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .description {
+            display: none;
+            margin-left: 40px;
+            color: #555;
+        }
+
+        #logoutButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #logoutButton:hover {
+            background-color: #c82333;
+        }
+          #searchBox {
     width: 100%;
     padding: 0px;
     margin-bottom: 10px;
@@ -101,32 +131,30 @@
     background-color: yellow;
     font-weight: bold;
 }
-
-        
     </style>
 </head>
 <body>
+    <!-- דף ההתחברות -->
     <div id="loginContainer">
         <h2>התחבר למערכת</h2>
         <input type="text" id="username" placeholder="שם משתמש">
         <input type="password" id="password" placeholder="סיסמה">
         <button onclick="checkLogin()">כניסה</button>
-        <p id="errorMessage" style="color: red; display: none;">שם משתמש או סיסמה שגויים</p>
-        
-    </div>
-    <div class="header-container">
-    <!-- לוגו צד ימין -->
-    <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
-
-    <!-- כותרת הדף -->
-    <h1>דרישות המיונים</h1>
-
-    <!-- לוגו צד שמאל -->
-    <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
-</div>
-<input type="text" id="searchBox" placeholder="חפש בדף..." onkeyup="searchFunction()">
+        <p id="errorMessage">שם משתמש או סיסמה שגויים</p>
     
-    <div id="contentContainer" style="display: none;">
+
+    </div>
+
+    <!-- דף התוכן הראשי -->
+    <div id="contentContainer">
+        <div class="header-container">
+            <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
+            <h1>דרישות המיונים</h1>
+            <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
+        
+        </div>
+        <input type="text" id="searchBox" placeholder="חפש בדף..." onkeyup="searchFunction()">
+        
         <div class="chapter">מזון</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לוודא איזה בוחנים צמחוניים/טבעוניים/אלרגים</div>
@@ -336,14 +364,16 @@
         <div class="sub-chapter">תת פרק 7</div>
         <div class="description">תיאור של תת פרק 1 בפרק 2.</div>
 </div>
+<button id="logoutButton" onclick="logout()">התנתקות</button>
+
 
 
     <script>
         function generatePassword() {
-            const daysMap = ["s", "m", "t", "w", "t", "f", "s"]; // ימי השבוע באנגלית (ראשון עד שבת)
+            const daysMap = ["s", "m", "t", "w", "t", "f", "s"]; 
             const today = new Date();
-            const dayOfWeek = today.getDay(); // מספר היום בשבוע (0 = ראשון, 6 = שבת)
-            const dayOfMonth = today.getDate(); // היום בחודש
+            const dayOfWeek = today.getDay();
+            const dayOfMonth = today.getDate();
             return "r" + daysMap[dayOfWeek] + dayOfMonth + "g";
         }
 
@@ -353,14 +383,28 @@
             const correctPassword = generatePassword();
 
             if (username === "hafakot610" && password === correctPassword) {
-                document.getElementById("loginContainer").style.display = "none";
-                document.getElementById("contentContainer").style.display = "block";
+                localStorage.setItem("isLoggedIn", "true");
+                showContent();
             } else {
                 document.getElementById("errorMessage").style.display = "block";
             }
         }
 
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            location.reload(); // טוען מחדש את הדף וחוזר למסך ההתחברות
+        }
+
+        function showContent() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("contentContainer").style.display = "block";
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("isLoggedIn") === "true") {
+                showContent();
+            }
+
             document.querySelectorAll(".chapter").forEach(chapter => {
                 chapter.addEventListener("click", function() {
                     let subChapters = this.nextElementSibling;
@@ -376,9 +420,7 @@
                 });
             });
         });
-        
-
-function searchFunction() {
+        function searchFunction() {
     let input = document.getElementById("searchBox").value.trim().toLowerCase();
     let chapters = document.querySelectorAll(".chapter, .sub-chapter, .description");
 
@@ -397,10 +439,6 @@ function searchFunction() {
         }
     });
 }
-
-
-
-        
     </script>
 </body>
 </html>
