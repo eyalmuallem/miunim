@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול מיונים</title>
+    <style>
+   .header-container {
+    display: flex;
+    justify-content: space-between; /* מיקום הלוגואים משני הצדדים */
+    align-items: center;
+    background-color: #ffffff; /* רקע בהיר תואם לעיצוב */
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd; /* קו תחתון להפרדה מהתוכן */
+}
+
+.header-container h1 {
+    margin: 0;
+    font-size: 24px; /* התאמת גודל כותרת */
+    text-align: center;
+    flex-grow: 1; /* נותן לכותרת מקום להתפרס במרכז */
+}
+
+.logo-left, .logo-right {
+    height: 50px; /* התאמת גובה הלוגואים */
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            background-color: #f9f9f9;
+            margin: 20px;
+        }
+        .chapter {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .sub-chapter-container {
+            display: none;
+            margin-left: 20px;
+        }
+        .sub-chapter {
+            background-color: #f1f1f1;
+            padding: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .description {
+            display: none;
+            margin-left: 40px;
+            color: #555;
+        }
+        #searchBox {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.highlight {
+    background-color: yellow;
+}
+
+    </style>
+</head>
+<body>
+<div class="header-container">
+    <!-- לוגו צד ימין -->
+    <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
+
+    <!-- כותרת הדף -->
+    <h1>דרישות המיונים</h1>
+
+    <!-- לוגו צד שמאל -->
+    <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
+</div>
+<input type="text" id="searchBox" placeholder="חפש בדף..." onkeyup="searchFunction()">
+
+
+
+
+    <h1>רשימת נושאים:</h1>
+    <div id="chapters">
+       <div id="chapters">
+    <!-- יצירת 24 פרקים -->
+    <div class="chapter">מזון</div>
+    <div class="sub-chapter-container">
+        <div class="sub-chapter">משימה 1: לוודא איזה בוחנים צמחוניים/טבעוניים/אלרגים</div>
+        <div class="description">
+        
+תאריך ביצוע: אוגוסט
+
+פירוט: לבדוק מול הבוחנים בכל שנה בכדי למנוע אי נעימויות, לשנות בהתאם הזמנת מזון
+
+</div>
+        <div class="sub-chapter">משימה 2: הזמנת חמגשיות (הסעדה)
+</div>
+        <div class="description">תאריך ביצוע: ספטמבר
+פירוט: המטרה להזמין חמגשיות בצורה שנקראת הסעדה- הזמנה של 25 חמגשיות שמגיעים ישירות אלינו. מול מפקדי לוגיסטיקת מקחר צריך לאשר את ההסעדה , יש להכין מסמך הנמקת צורך חתום סא"ל ולהעביר אליהם.
+</div>
+        <div class="sub-chapter">משימה 3: הזמנת כיבוד+ פינת קפה מטבח מקחר</div>
+        <div class="description">תאריך ביצוע: ספטמבר להכין  -להזמין  חודש וחצי לפני המיונים
+פירוט: להכין הזמנה לפי כמות אנשי הצוות אשר לוקחים חלק במיונים (מקוון ופרונטלי). ראה פורמט לדוגמא במחשב צבאי (הזמנת מזון, לוגיסטיקה, המיונים ללהקות הצבאית 24).
+</div>
+        <div class="sub-chapter">משימה 4:  בדיקת קבלת תרומת מארזי חטיפים מטעם ארגון יותר</div>
+        <div class="description">תאריך ביצוע: ספטמבר
+פירוט: הכיבוד ממטבח מקחר מאוד יקר ולכן שווה לבדוק בחגי תשרי את האפשרות לקבל תרומה של חטיפים מטעם ארגון יותר שמביא מארזים של חטיפים לכל הצבא ונשאר בעודפים גדולים. 
+</div>
+        <div class="sub-chapter">משימה 5: תיאום כרטיס צבאי לשימוש סופר לטובת קניית ירקות ופירות ומתוקים</div>
+        <div class="description">תאריך ביצוע: ספטמבר- בקשת הכרטיס, סוף נובמבר- קנייה
+פירוט: הזמנת פירות וירקות חתוכים מורכבת דרך מטבח מקחר בשל תיאום ההובלות שצריכים להגיע בכל יום בשביל לשמור על טריות, כאלטרנטיבה דרך לוגיסטיקת מקחר יש לתאם קבלת כרטיס קחר לקניות של פירות וירקות שלמים בסמוך למיונים הפרונטליים. יש לשמור את החשבונית ולקנות מוצרים לפי הרשימה של מה שמאושר לקנות בצבא.
+</div>
+        <div class="sub-chapter">משימה 6:  הזמנת מזון של הבוחנים במיון
+</div>
+        <div class="description">תאריך ביצוע: במהלך המיונים
+פירוט: הבוחנים בדרך כלל לא אוכלים את החמגשיות של צהל ולכן עלינו לשאול אותם לפני זמן הפסקת צהריים האם הם מעוניינים להזמין אוכל (על חשבונם כמובן) . אם רוצים נהדר ואז לרכז הזמנת וולט שתגיע בדיוק לארוחת צהריים.
+</div>
+        <div class="sub-chapter">תת פרק 7</div>
+        <div class="description">תיאור של תת פרק 7 בפרק 1.</div>
+        <div class="sub-chapter">תת פרק 8</div>
+        <div class="description">תיאור של תת פרק 8 בפרק 1.</div>
+        <div class="sub-chapter">תת פרק 9</div>
+        <div class="description">תיאור של תת פרק 9 בפרק 1.</div>
+        <div class="sub-chapter">תת פרק 10</div>
+        <div class="description">תיאור של תת פרק 10 בפרק 1.</div>
+      
+    </div>
+
+    <!-- חזור על המבנה הזה ל-24 פרקים -->
+    <div class="chapter">פרק 2</div>
+    <div class="sub-chapter-container">
+        <div class="sub-chapter">תת פרק 1</div>
+        <div class="description">תיאור של תת פרק 1 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 2</div>
+        <div class="description">תיאור של תת פרק 2 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 3</div>
+        <div class="description">תיאור של תת פרק 3 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 4</div>
+        <div class="description">תיאור של תת פרק 4 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 5</div>
+        <div class="description">תיאור של תת פרק 5 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 6</div>
+        <div class="description">תיאור של תת פרק 6 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 7</div>
+        <div class="description">תיאור של תת פרק 7 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 8</div>
+        <div class="description">תיאור של תת פרק 8 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 9</div>
+        <div class="description">תיאור של תת פרק 9 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 10</div>
+        <div class="description">תיאור של תת פרק 10 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 11</div>
+        <div class="description">תיאור של תת פרק 11 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 12</div>
+        <div class="description">תיאור של תת פרק 12 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 13</div>
+        <div class="description">תיאור של תת פרק 13 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 14</div>
+        <div class="description">תיאור של תת פרק 14 בפרק 2.</div>
+        <div class="sub-chapter">תת פרק 15</div>
+        <div class="description">תיאור של תת פרק 15 בפרק 2.</div>
+</div>
+
+
+    <script>
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".chapter").forEach(chapter => {
+                chapter.addEventListener("click", function() {
+                    let subChapters = this.nextElementSibling;
+                    subChapters.style.display = subChapters.style.display === "block" ? "none" : "block";
+                });
+            });
+
+            document.querySelectorAll(".sub-chapter").forEach(subChapter => {
+                subChapter.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    let description = this.nextElementSibling;
+                    description.style.display = description.style.display === "block" ? "none" : "block";
+                });
+            });
+        });
+       
+    function searchFunction() {
+        let input = document.getElementById("searchBox").value.toLowerCase();
+        let elements = document.querySelectorAll(".chapter, .sub-chapter, .description");
+
+        elements.forEach(element => {
+            let text = element.innerText.toLowerCase();
+            if (text.includes(input) && input !== "") {
+                element.style.display = "block"; 
+                element.classList.add("highlight");
+            } else {
+                element.classList.remove("highlight");
+            }
+        });
+    }
+
+    </script>
+</body>
+</html>
