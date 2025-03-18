@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ניהול מיונים</title>
     <style>
-   .header-container {
+    .header-container {
     display: flex;
     justify-content: space-between; /* מיקום הלוגואים משני הצדדים */
     align-items: center;
@@ -24,7 +24,6 @@
 .logo-left, .logo-right {
     height: 50px; /* התאמת גובה הלוגואים */
 }
-
         body {
             font-family: Arial, sans-serif;
             direction: rtl;
@@ -53,6 +52,36 @@
             margin-left: 40px;
             color: #555;
         }
+        #loginContainer {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        #loginContainer input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #loginContainer button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #loginContainer button:hover {
+            background-color: #218838;
+        }
+        
         #searchBox {
     width: 100%;
     padding: 0px;
@@ -63,12 +92,22 @@
 }
 .highlight {
     background-color: yellow;
+    font-weight: bold;
 }
 
+        
     </style>
 </head>
 <body>
-<div class="header-container">
+    <div id="loginContainer">
+        <h2>התחבר למערכת</h2>
+        <input type="text" id="username" placeholder="שם משתמש">
+        <input type="password" id="password" placeholder="סיסמה">
+        <button onclick="checkLogin()">כניסה</button>
+        <p id="errorMessage" style="color: red; display: none;">שם משתמש או סיסמה שגויים</p>
+        
+    </div>
+    <div class="header-container">
     <!-- לוגו צד ימין -->
     <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
 
@@ -79,15 +118,9 @@
     <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
 </div>
 <input type="text" id="searchBox" placeholder="חפש בדף..." onkeyup="searchFunction()">
-
-
-
-
-    <h1>רשימת נושאים:</h1>
-    <div id="chapters">
-       <div id="chapters">
-    <!-- יצירת 24 פרקים -->
-    <div class="chapter">מזון</div>
+    
+    <div id="contentContainer" style="display: none;">
+        <div class="chapter">מזון</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לוודא איזה בוחנים צמחוניים/טבעוניים/אלרגים</div>
         <div class="description">
@@ -163,11 +196,30 @@
         <div class="description">תיאור של תת פרק 14 בפרק 2.</div>
         <div class="sub-chapter">תת פרק 15</div>
         <div class="description">תיאור של תת פרק 15 בפרק 2.</div>
-</div>
-
+    </div>
 
     <script>
-    
+        function generatePassword() {
+            const daysMap = ["s", "m", "t", "w", "t", "f", "s"]; // ימי השבוע באנגלית (ראשון עד שבת)
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // מספר היום בשבוע (0 = ראשון, 6 = שבת)
+            const dayOfMonth = today.getDate(); // היום בחודש
+            return "r" + daysMap[dayOfWeek] + dayOfMonth + "g";
+        }
+
+        function checkLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const correctPassword = generatePassword();
+
+            if (username === "hafakot25" && password === correctPassword) {
+                document.getElementById("loginContainer").style.display = "none";
+                document.getElementById("contentContainer").style.display = "block";
+            } else {
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll(".chapter").forEach(chapter => {
                 chapter.addEventListener("click", function() {
@@ -184,22 +236,31 @@
                 });
             });
         });
-       
-    function searchFunction() {
-        let input = document.getElementById("searchBox").value.toLowerCase();
-        let elements = document.querySelectorAll(".chapter, .sub-chapter, .description");
+        
 
-        elements.forEach(element => {
-            let text = element.innerText.toLowerCase();
-            if (text.includes(input) && input !== "") {
-                element.style.display = "block"; 
-                element.classList.add("highlight");
-            } else {
-                element.classList.remove("highlight");
-            }
-        });
-    }
+function searchFunction() {
+    let input = document.getElementById("searchBox").value.trim().toLowerCase();
+    let chapters = document.querySelectorAll(".chapter, .sub-chapter, .description");
 
+    // קודם כל, ננקה הדגשות ישנות
+    chapters.forEach(chapter => {
+        chapter.innerHTML = chapter.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/gi, "$1");
+    });
+
+    if (input === "") return; // אם אין טקסט בחיפוש, לא עושים כלום
+
+    chapters.forEach(chapter => {
+        let text = chapter.textContent.toLowerCase();
+        if (text.includes(input)) {
+            let regex = new RegExp(input, "gi"); // חיפוש בכל האותיות
+            chapter.innerHTML = chapter.innerHTML.replace(regex, match => `<span class="highlight">${match}</span>`);
+        }
+    });
+}
+
+
+
+        
     </script>
 </body>
 </html>
