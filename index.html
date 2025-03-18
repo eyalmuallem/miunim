@@ -131,6 +131,59 @@
     background-color: yellow;
     font-weight: bold;
 }
+#monthSelector {
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px;
+    width: 250px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.months {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 עמודות */
+    grid-gap: 5px;
+    justify-items: center;
+}
+
+.months button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.months button:hover {
+    background-color: #0056b3;
+}
+#showAllButton {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#showAllButton:hover {
+    background-color: #218838;
+}
+
+
     </style>
 </head>
 <body>
@@ -154,7 +207,26 @@
         
         </div>
         <input type="text" id="searchBox" placeholder="חפש בדף..." onkeyup="searchFunction()">
-        
+        <div id="monthSelector">
+    <h3>בחר חודש</h3>
+    <div class="months">
+        <button onclick="filterByMonth('ינואר')">ינואר</button>
+        <button onclick="filterByMonth('פברואר')">פברואר</button>
+        <button onclick="filterByMonth('מרץ')">מרץ</button>
+        <button onclick="filterByMonth('אפריל')">אפריל</button>
+        <button onclick="filterByMonth('מאי')">מאי</button>
+        <button onclick="filterByMonth('יוני')">יוני</button>
+        <button onclick="filterByMonth('יולי')">יולי</button>
+        <button onclick="filterByMonth('אוגוסט')">אוגוסט</button>
+        <button onclick="filterByMonth('ספטמבר')">ספטמבר</button>
+        <button onclick="filterByMonth('אוקטובר')">אוקטובר</button>
+        <button onclick="filterByMonth('נובמבר')">נובמבר</button>
+        <button onclick="filterByMonth('דצמבר')">דצמבר</button>
+    </div>
+</div>
+    <button id="showAllButton" onclick="showAllTasks()">הצג הכל</button>
+</div>
+
         <div class="chapter">מזון</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לוודא איזה בוחנים צמחוניים/טבעוניים/אלרגים</div>
@@ -420,25 +492,79 @@
                 });
             });
         });
-        function searchFunction() {
-    let input = document.getElementById("searchBox").value.trim().toLowerCase();
-    let chapters = document.querySelectorAll(".chapter, .sub-chapter, .description");
+     function filterByMonth(month) {
+    let allElements = document.querySelectorAll(".chapter, .sub-chapter, .description, .sub-chapter-container");
 
-    // קודם כל, ננקה הדגשות ישנות
-    chapters.forEach(chapter => {
-        chapter.innerHTML = chapter.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/gi, "$1");
+    // הסתרת כל התוכן
+    allElements.forEach(element => {
+        element.style.display = "none";
     });
 
-    if (input === "") return; // אם אין טקסט בחיפוש, לא עושים כלום
+    let found = false;
+    allElements.forEach(element => {
+        if (element.textContent.includes(month)) {
+            found = true;
+            element.style.display = "block";
 
-    chapters.forEach(chapter => {
-        let text = chapter.textContent.toLowerCase();
-        if (text.includes(input)) {
-            let regex = new RegExp(input, "gi"); // חיפוש בכל האותיות
-            chapter.innerHTML = chapter.innerHTML.replace(regex, match => `<span class="highlight">${match}</span>`);
+            // פתיחת הקבוצה של תתי הפרקים אם מדובר במשימה בתוך תת פרק
+            let parentContainer = element.closest(".sub-chapter-container");
+            if (parentContainer) {
+                parentContainer.style.display = "block"; // הצגת הקבוצה של תתי הפרקים
+                let mainChapter = parentContainer.previousElementSibling;
+                if (mainChapter) {
+                    mainChapter.style.display = "block"; // הצגת הכותרת הראשית
+                }
+            }
+
+            // פתיחת תתי-הפרקים
+            let subChapter = element.closest(".sub-chapter");
+            if (subChapter) {
+                subChapter.style.display = "block"; // הצגת תת הכותרת
+                let subParent = subChapter.closest(".sub-chapter-container");
+                if (subParent) {
+                    subParent.style.display = "block"; // הצגת הקבוצה של תתי הפרקים
+                    let mainChapter = subParent.previousElementSibling;
+                    if (mainChapter) {
+                        mainChapter.style.display = "block"; // הצגת הפרק הראשי
+                    }
+                }
+            }
+
+            // פתיחת תוכן המשימה (התיאור)
+            let description = element.closest(".description");
+            if (description) {
+                description.style.display = "block"; // הצגת תיאור המשימה
+                let subChapter = description.previousElementSibling;
+                if (subChapter) {
+                    subChapter.style.display = "block"; // הצגת המשימה עצמה
+                }
+                let subParent = description.closest(".sub-chapter-container");
+                if (subParent) {
+                    subParent.style.display = "block"; // הצגת כל התת-פרקים
+                    let mainChapter = subParent.previousElementSibling;
+                    if (mainChapter) {
+                        mainChapter.style.display = "block"; // הצגת הפרק הראשי
+                    }
+                }
+            }
         }
     });
+
+    if (!found) {
+        alert("לא נמצאו משימות לחודש " + month);
+    }
+
+    // הצגת כפתור "הצג הכל"
+    document.getElementById("showAllButton").style.display = "block";
 }
+
+function showAllTasks() {
+    // טוען את הדף מחדש למצב ההתחלתי
+    location.reload();
+}
+
+
+
     </script>
 </body>
 </html>
