@@ -137,6 +137,33 @@
             <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
             <h1>דרישות המיונים</h1>
             <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
+        <!-- פילטר לפי חודש -->
+<div id="monthFilterContainer" style="margin: 20px;">
+    <button id="toggleMonthFilter" style="padding: 10px; border-radius: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+        סנן לפי חודש
+    </button>
+    <div id="monthDropdown" style="display: none; margin-top: 10px;">
+        <select id="monthSelect" style="padding: 10px; border-radius: 5px;">
+            <option value="">בחר חודש</option>
+            <option value="ינואר">ינואר</option>
+            <option value="פברואר">פברואר</option>
+            <option value="מרץ">מרץ</option>
+            <option value="אפריל">אפריל</option>
+            <option value="מאי">מאי</option>
+            <option value="יוני">יוני</option>
+            <option value="יולי">יולי</option>
+            <option value="אוגוסט">אוגוסט</option>
+            <option value="ספטמבר">ספטמבר</option>
+            <option value="אוקטובר">אוקטובר</option>
+            <option value="נובמבר">נובמבר</option>
+            <option value="דצמבר">דצמבר</option>
+        </select>
+        <button onclick="resetFilter()" style="margin-right: 10px; padding: 10px; border-radius: 5px; background-color: #6c757d; color: white; border: none; cursor: pointer;">
+            חזרה למצב רגיל
+        </button>
+    </div>
+</div>
+
         </div>
 
         
@@ -406,6 +433,49 @@
                 });
             });
         });
+        document.getElementById("toggleMonthFilter").addEventListener("click", function () {
+    const dropdown = document.getElementById("monthDropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
+document.getElementById("monthSelect").addEventListener("change", function () {
+    const selectedMonth = this.value;
+    if (!selectedMonth) return;
+
+    // הסתר את כל הפרקים ותתי הפרקים
+    document.querySelectorAll(".chapter").forEach(chap => chap.style.display = "none");
+    document.querySelectorAll(".sub-chapter-container").forEach(container => {
+        container.style.display = "none";
+        container.querySelectorAll(".sub-chapter, .description").forEach(el => el.style.display = "none");
+    });
+
+    // הצג רק את מה שקשור לחודש
+    document.querySelectorAll(".description").forEach(desc => {
+        if (desc.textContent.includes(selectedMonth)) {
+            const sub = desc.previousElementSibling;
+            const subContainer = sub.parentElement;
+
+            subContainer.previousElementSibling.style.display = "block"; // הצג כותרת פרק
+            subContainer.style.display = "block"; // הצג קונטיינר תתי פרקים
+            sub.style.display = "block"; // תת פרק
+            desc.style.display = "block"; // תיאור
+        }
+    });
+});
+
+function resetFilter() {
+    // החזרת כל הפרקים למצבם הרגיל
+    document.querySelectorAll(".chapter").forEach(chap => chap.style.display = "block");
+    document.querySelectorAll(".sub-chapter-container").forEach(container => {
+        container.style.display = "none";
+        container.querySelectorAll(".sub-chapter").forEach(sub => sub.style.display = "block");
+        container.querySelectorAll(".description").forEach(desc => desc.style.display = "none");
+    });
+
+    document.getElementById("monthSelect").value = "";
+    document.getElementById("monthDropdown").style.display = "none";
+}
+
     </script>
 </body>
 </html>
