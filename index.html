@@ -119,11 +119,57 @@
         #logoutButton:hover {
             background-color: #c82333;
         }
+  #sidebar a {
+    text-decoration: none;
+    display: block;
+    padding: 6px;
+    color: black;
+  }
+#sidebarNav a.active {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+.chapter.active-chapter {
+    background-color:NAVY;
+    color: white;
+    border-radius: 5px;
+}
+#sidebarNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+#sidebarNav a {
+  font-size: 13px;
+  padding: 6px 10px;
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  color: #333;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+#sidebarNav a:hover,
+#sidebarNav a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+
+
+
         
         
     </style>
 </head>
 <body>
+
     <!-- דף ההתחברות -->
     <div id="loginContainer">
         <h2>התחבר למערכת</h2>
@@ -132,21 +178,55 @@
         <button onclick="checkLogin()">כניסה</button>
         <p id="errorMessage">שם משתמש או סיסמה שגויים</p>
     </div>
+    
 
     <!-- דף התוכן הראשי -->
     <div id="contentContainer">
+    
         <div class="header-container">
             <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
             <h1>דרישות המיונים</h1>
             <img class="logo-left" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Badge_of_the_Israeli_Defense_Forces_2022_version.svg/1200px-Badge_of_the_Israeli_Defense_Forces_2022_version.svg.png" alt="לוגו שמאל">
-      
+
 
         </div>
+        <div id="sidebarNav">
+  <a href="#mazon">מזון</a>
+  <a href="#tikshuv">תקשוב</a>
+  <a href="#hovalot">הובלות</a>
+  <a href="#logistika">לוגיסטיקה</a>
+  <a href="#miluim">מילואים</a>
+  <a href="#bochanim">בוחנים</a>
+  <a href="#tochen">תוכן מיונים</a>
+  <a href="#mitnadvim">מתנדבים</a>
+  <a href="#shealon">שאלון ההרשמה</a>
+  <a href="#tochna">תוכנה</a>
+  <a href="#luazim">לו״זים</a>
+  <a href="#hamal">חמל מיונים</a>
+  <a href="#mitav">מיטב</a>
+  <a href="#hotsala">הוצלא</a>
+  <a href="#hasarta">הסרטה + תיעוד</a>
+  <a href="#shivuk">שיווק</a>
+  <a href="#mikomim">מיקום מיונים</a>
+  <a href="#sound">סאונד + כלים</a>
+  <a href="#avtacha">אבטחה וסדרנות</a>
+  <a href="#mismachim">מסמכים</a>
+  <a href="#gader">גדר וגן</a>
+  <a href="#ishurim">אישורים</a>
+  <a href="#koach">כח אדם</a>
+  <a href="#measafim">מאספים</a>
+  
+</div>
+
+        
 
         <!-- פילטר לפי חודש -->
+             <div style="margin: 10px;">
+  <button id="showAllButton" style="padding: 8px; border-radius: 8px;">מעבר לדף המלא</button>
+</div>
 <div id="monthFilterContainer" style="margin: 20px;">
     <button id="toggleMonthFilter" style="padding: 10px; border-radius: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
-        סנן לפי חודש
+        סנן  
     </button>
     <div id="monthDropdown" style="display: none; margin-top: 10px;">
         <select id="monthSelect" style="padding: 10px; border-radius: 5px;">
@@ -170,7 +250,7 @@
     </div>
     <div class="chapters-grid">
 
-        <div class="chapter">מזון</div>
+<div class="chapter" id="mazon">מזון</div>
     <div class="sub-chapter-container">
     
         <div class="sub-chapter">משימה 1: לוודא איזה בוחנים צמחוניים/טבעוניים/אלרגים</div>
@@ -209,8 +289,7 @@
       
     </div>
 
-    <!-- חזור על המבנה הזה ל-24 פרקים -->
-    <div class="chapter">תקשוב</div>
+<div class="chapter" id="tikshuv">תקשוב</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: קבלת חייל תקשובי שיהיה בכל המיונים איתנו</div>
         <div class="description">תאריך ביצוע: אוגוסט<br>
@@ -246,7 +325,7 @@
 </div>
      
     </div>
-      <div class="chapter">הובלות</div>
+<div class="chapter" id="hovalot">הובלות</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: הזמנת הובלות
 (לתאם אוטובוס/ משאית להובלת הציוד)
@@ -266,7 +345,7 @@
 </div>
         
         </div>
-         <div class="chapter">לוגיסטיקה</div>
+<div class="chapter" id="logistika">לוגיסטיקה</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: להכין רשימת ציוד</div>
         <div class="description">תאריך ביצוע: יולי<br>
@@ -296,7 +375,7 @@
 </div>
        
 </div>
-<div class="chapter">מילואים</div>
+<div class="chapter" id="miluim">מילואים</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: בדיקת בוחנים במאגר המילואים  </div>
         <div class="description">תאריך ביצוע:מאי<br>
@@ -316,7 +395,7 @@
 </div>
 
 </div>
-<div class="chapter">בוחנים</div>
+<div class="chapter" id="bochanim">בוחנים</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: קביעת בוחנים מול רמד הפקות (כולל אופציות חלופיות לפי סדר)</div>
         <div class="description">תאריך ביצוע: מרץ/אפריל<br>
@@ -366,7 +445,7 @@
 פירוט: על המפיקים לדאוג לבוחנים שלא יכולים לזוז שעות רבות בשל המיונים לקבל: מים, קפה, כיבוד וכו'. לקפה של הבוחנים יש הוראות לפי בוחן. ראה נספח "איך שותים הבוחנים את הקפה"
 </div>
 </div>
-<div class="chapter">תוכן מיונים</div>
+<div class="chapter" id="tochen">תוכן מיונים</div>
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: הצעת מחיר הקלטות</div>
 <div class="description">
@@ -491,7 +570,8 @@
 
 
 </div>
-<div class="chapter">מתנדבים </div>
+<div class="chapter" id="mitnadvim">מתנדבים</div>
+
     <div class="sub-chapter-container">
 
     <div class="sub-chapter">משימה 1: קבלת רשימה סופית מאחראית מתנדבים של פוטנציאל המתמיינים (לוודא שלא התמיינו כבר)</div>
@@ -539,8 +619,8 @@
     </div>
 
 </div>
-<div class="chapter"> שאלון ההרשמה למדור הפקות
-</div>
+<div class="chapter" id="shealon">שאלון ההרשמה למדור הפקות</div>
+
   <div class="sub-chapter-container">
     <div class="sub-chapter">משימה 1: לתקף שאלון סופי</div>
     <div class="description">תאריך ביצוע: מאי<br>בשאלון המלש"ב בוחרים לאיזה מקצועות הם מעוניינים להרשם ובחלק מהמקצועות אפילו מבצעים שלב ראשוני (לדוגמה שולחים אודישן מקוון למשחק ושירה). על השאלון להיות פתוח כשלושה שבועות. השאלון נפתח ישר בסגירת שאלון הוואי ותקשורת ונשלח לפוטנציאל שאושר על ידי מיטב. יש לתקף את המשימות הרשומות על פי השלבים בכל מיון ובנוסף יש לעדכן את רשימת השירים המאושרים.</div>
@@ -563,8 +643,8 @@
 
         
 </div>
-<div class="chapter"> תוכנה  
-</div>
+<div class="chapter" id="tochna">תוכנה</div>
+
    <div class="sub-chapter-container">
     <div class="sub-chapter">משימה 1: לבצע טסט לתוכנה לפני יציאה לשימוש</div>
     <div class="description">תאריך ביצוע: יולי/אוגוסט<br>לאחר שמבצעים התאמות ושינויים תבדקו מא ועד ת שהדברים עובדים, שלא יפתיעו אתכם במהלך המיונים בכלום.</div>
@@ -594,8 +674,8 @@
     <div class="description">תאריך ביצוע: אוקטובר<br>לכל בוחן/צוות מיונים יש אישור לערוך תכנים שונים בתוכנה. יש להיערך בהתאם ולדאוג למיילים שיקבלו הרשאות ספציפיות במיונים וישמשו את הבוחנים בהתאם. ליהי גם תסביר בדיוק איך, תשלמו לה!</div>
 </div>        
 
-<div class="chapter"> לו״זים  
-</div>
+<div class="chapter" id="luazim">לו״זים</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: הכנת לוז לכל יום מיון- לצוות ולבוחנים</div>
 <div class="description">תאריך ביצוע: אוקטובר<br>יש להכין את הלוזים מראש- לחשב את הזמנים לפי השלבים שיש לכל מקצוע ולפי כמות הנבחנים המשוערת. בנוסף יש אילוצים לפעמים שצריך להתחשב בהם. ההערכות מראש הכרחית כדי לגלות האם הלוז הגיוני או אם יש צורך בהתאמות (לדוגמא רכישת עוד חדר בבית חיל האוויר).</div>
@@ -620,8 +700,8 @@
 
         
 </div>
-<div class="chapter"> חמל מיונים  
-</div>
+<div class="chapter" id="hamal">חמל מיונים</div>
+
     <div class="sub-chapter-container">
       <div class="sub-chapter">משימה 1: הכנת אקסלים לחמל מיונים</div>
 <div class="description">תאריך ביצוע: אוגוסט<br>החמל עובד על מחשב צבאי (אבטחת מידע), לכל חייל יש לפתוח אקסל שבו הוא ממלא סטטוס של השיחות שהוא מבצע. החייל רושם עם מי הוא דיבר ואם יש הערות בשביל שצוות המיונים ידע להתייחס.</div>
@@ -660,8 +740,8 @@
 <div class="description">תאריך ביצוע: כל השנה<br>כלי התקשורת של המלש"בים מולנו הוא טלפון המיונים, על המוקד להיות זמין לאורך כל השנה למלש"בים.</div>
 
 </div>
-<div class="chapter"> מיטב  
-</div>
+<div class="chapter" id="mitav">מיטב</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לקבל דוח פוטנציאל</div>
 <div class="description">תאריך ביצוע: סגירת הוואי ותקשורת<br>פוטנציאל היא הרשימה של כל מי שמאושר למיון, את הפוטנציאל יש לקבל יום/יומיים לאחר סגירת שאלון הוואי ותקשורת. הפוטנציאל כולל נתונים אישיים על המלש"בים כגון: ת"ז, מספרי טלפון, דפ"ר, מגורים.</div>
@@ -710,8 +790,8 @@
 
         
 </div>
-<div class="chapter"> הוצלא  
-</div>
+<div class="chapter" id="hotsala">הוצלא</div>
+
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: לסיים להכין עיצובים ולאשר מול רמ"ד הפקות</div>
 <div class="description">תאריך ביצוע: יולי<br>המיונים הינם ממותגים (רולאפים, שימשונית, אוהלי שם, תגים, ועוד) ויש לדאוג במידה ויש עיצובים חדשים לאשר אל מול רמ"ד הפקות זמן מראש.</div>
@@ -732,8 +812,8 @@
 <div class="description">תאריך ביצוע: מאי<br>ההגעה לבתי הספר הינה חדשה וצריך להגיע עם עיצובים ממותגים מותאמים – עדיף פלאיירים ורולאפ אבל שיהיו שלכם.</div>
 
 </div>
-<div class="chapter"> הסרטה + תיעוד  
-</div>
+<div class="chapter" id="hasarta">הסרטה + תיעוד</div>
+
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: לבצע פגישה עם הסרטה להבין מה הציוד שצריך + לתאם לקיחת ציוד מהסרטה + איש לעזר טכני</div>
 <div class="description">תאריך ביצוע: אוקטובר<br>להיפגש עם מפקדת מט"ח והחייל שמוקצה לעזור לנו, להסביר מה הצורך שלנו ולבקש מהם ציוד בהתאם. בנוסף לתאם תאריכים של החזקת הציוד.</div>
@@ -755,8 +835,8 @@
 
         
 </div>
-<div class="chapter"> שיווק - כולל בתי ספר  
-</div>
+<div class="chapter" id="shivuk">שיווק - כולל בתי ספר</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: להכין תוכנית לבתי ספר</div>
 <div class="description">תאריך ביצוע: מרץ<br>לבנות את התוכן שאנחנו רוצים להביא לבתי ספר (עדיפות כיתות י"א). המטרה היא לחשוף לתפקידים הקיימים אצלנו ולהסביר מה התהליך שעל המלש"ב לעבור. לתכנן אל מי מגיעים ומתי, וגם היערכות לוגיסטית.</div>
@@ -793,8 +873,8 @@
 
         
 </div>
-<div class="chapter"> מיקום מיונים מקוונים + פרונטליים  
-</div>
+<div class="chapter" id="mikomim">מיקום מיונים מקוונים + פרונטליים</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: פרונטלי - לקבל הצעת מחיר משלוש מקומות</div>
 <div class="description">תאריך ביצוע: אפריל<br>השכרת מיקום המיונים הפרונטליים מבוצעת באופן של מכרז. יש לבצע בדיקה עם 3 מקומות שיכולים לענות על הצורך (מבחינת המתקנים ותאריכים), מכל מקום יש לבקש הצעת מחיר. לאחר מכן יהיה עליכם לבצע תהליך מכרז אל מול לוגיסטיקת מקח"ר (בכל שנה התהליך משתנה ולכן תבדקו איתם מה הם צריכים). בגדול צריך להכין מסמך שמסביר למה מקום אחד עדיף על השניים האחרים (בעיקר מעניין אותם כלכלית), אבל גם לפרט על אופן הגעה למלש"ב, התאמה לצרכים הלוגיסטיים שלנו, כמה אנשים יכול להכיל, ועוד (דוגמה יש במחשב הצבאי). יש כמה גורמים שצריכים לאשר את ההשכרה (ב-2024 התהליך היה במרקט).</div>
@@ -816,8 +896,8 @@
 
         
 </div>
-<div class="chapter"> סאונד + כלים  
-</div>
+<div class="chapter" id="sound">סאונד + כלים</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לתקף מבחן סאונד - עם אמוץ</div>
 <div class="description">תאריך ביצוע: יוני׳<br>לדייק את המבחן העיוני ואת השלבים האחרים – ולהכין הוספת שלב. צריך להוציא לאמוץ ימי מילואים או לעשות ביום שהוע מגיע. לתקף גם פרמטרים איתו.</div>
@@ -838,8 +918,8 @@
 <div class="description">תאריך ביצוע: במיון סאונד - דצמבר<br>לטובת מיון סאונד לשלב מעשי יש להעביר לבוחנים את מבחני הסאונד של מי שעברו (מסודר לפי סדר הבחינות) כדי שיוכלו לתשאל את הנבחנים בהתאם לניסיון ולתשובות שלהם.</div>
 
 </div>
-<div class="chapter"> אבטחה וסדרנות  
-</div>
+<div class="chapter" id="avtacha">אבטחה וסדרנות</div>
+
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לבנות תיק בטיחות - כולל לקבל כמות מאבטחים דרושה</div>
 <div class="description">תאריך ביצוע: אוגוסט<br>תיק הבטיחות הוא המסמך שמתכלל את ההיערכות הבטיחותית שלנו לקראת תקופת המיונים. יש לקבוע אותו עם אחראי האבטחה של מקח"ר – להבין מה דורשים נהלי הבטיחות המעודכנים. את תיק הבטיחות צריך להחתים ברמת רמ"ח ועליו להיות אצל קצינת המיונים במהלך כל המיונים.</div>
@@ -872,8 +952,7 @@
 <div class="description">תאריך ביצוע: אוקטובר<br>שיהיה בולט וברור. יש עיצוב קיים – אל תתעצלו!</div>
 
 </div>
-<div class="chapter"> מסמכים  
-</div>
+<div class="chapter" id="mismachim">מסמכים</div>
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: חלוקת עבודה של הצוות לזמן המיונים עצמם (מצורף קישור)</div>
 <div class="description">תאריך ביצוע: אוקטובר<br>בכל יום במהלך המיונים יש כמה נושאים שעל צוות המיונים לטפל במקביל. חשוב להיערך מראש מי עושה מה כדי להיות הכי יעילים שיש. כמובן תחומי האחריות יכולים להשתנות אבל הבסיס הזה מאוד עוזר.<br>
@@ -915,8 +994,7 @@
 
         
 </div>
-<div class="chapter"> גדר וגן + מסכים  
-</div>
+<div class="chapter" id="gader">גדר וגן + מסכים</div>
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: להכין מצגת שתהיה במסכים</div>
 <div class="description">תאריך ביצוע: יולי<br>במיונים הפרונטליים, במקום שבו מחכים המלש"בים, יש מסך שפועל בלופים. במסך מוצגת העשייה של מדור הפקות (אירועים, קליפים, חוויות). יש מצגת קיימת שהכינה חיילת בשם דנה חן, אבל כמובן שהעשייה תמיד מתעדכנת ויש לעדכן את המצגת ולהוסיף כמה שיותר תכנים שיעניינו את המלש"ב בזמן ההמתנה.</div>
@@ -937,8 +1015,7 @@
 
         
 </div>
-<div class="chapter"> אישורים (שם זמני)  
-</div>
+<div class="chapter" id="ishurim">אישורים (שם זמני)</div>
     <div class="sub-chapter-container">
         <div class="sub-chapter">משימה 1: לקבל אישור לקחת חלק בכנס הבת הדתייה</div>
 <div class="description">תאריך ביצוע: אוגוסט<br>כנס הבת הדתייה הוא כמו פסטיבל יותר רק שהוא יותר מצומצם. אנחנו רוצים שתהיה לנו שם עמדה שנסביר על התפקיד שלנו ונעודד את הבנות הדתיות לבוא אלינו (בקטע לא מלחיץ).</div>
@@ -953,8 +1030,7 @@
 <div class="description">תאריך ביצוע: יוני׳<br>בפסטיבל יותר יש ביתן לכל חיל ואנחנו רוצים שאנשים ידעו שיש דבר כזה מדור הפקות! אנחנו גם מופיעים באירוע ככה שזה יותר פשוט ממה שאתם חושבים. תכינו דברים לחלק למלש"בים – יש ממש מלחמה על תשומת הלב שלהם באירוע.</div>
 
 </div>
-<div class="chapter"> כח אדם  
-</div>
+<div class="chapter" id="koach">כח אדם</div>
     <div class="sub-chapter-container">
        <div class="sub-chapter">משימה 1: חלוקת גיוסים של העוברים</div>
 <div class="description">תאריך ביצוע: פברואר<br>הסתיימו המיונים הרגילים והמאספים! כל הכבוד! עכשיו תגייסו אותם!<br>למדור הפקות יש שינויי גיוסים בשנה, ולכן תגייסו את המלש"בים לפי שחרורים (לדוגמה: זמר משתחרר מחמישיית חינוך אז צריך להשלים אחד במקומו) ולפי מדיניות שמתווה רמ"ד הפקות. שימו לב להתחשב במיקום מגוריהם של המלש"בים ובמתי הם בני 18.</div>
@@ -964,8 +1040,7 @@
 
         
 </div>
-<div class="chapter"> מאספים  
-</div>
+<div class="chapter" id="measafim">מאספים</div>
     <div class="sub-chapter-container">
      <div class="sub-chapter">משימה 1: לקבל ממיטב ומתנדבים רשימה של מאספים</div>
 <div class="description">תאריך ביצוע: ינואר<br>לקבל פוטנציאל – לאשר מולם את מי שהיה חולה ומבחינתו מגיע לו מיון חוזר ולקבל מהם את מי שמתווסף למיון שלנו.</div>
@@ -1157,7 +1232,168 @@ function resetFilter() {
     document.getElementById("monthSelect").value = "";
     document.getElementById("monthDropdown").style.display = "none";
 }
+const sections = document.querySelectorAll('.chapter');
+const navLinks = document.querySelectorAll('#sidebar a');
+
+window.addEventListener('scroll', () => {
+    let current = "";
+
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+            current = section.id;
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+    });
+});
+document.querySelectorAll('#sidebarNav a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        const isActive = this.classList.contains('active');
+
+        if (isActive) {
+            // מניעת גלילה מיותרת
+            e.preventDefault();
+
+            // הסרת הדגשה מהקישור ומהפרק
+            this.classList.remove('active');
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.classList.remove('active-chapter');
+            }
+        } else {
+            // נקה הדגשות קודם
+            document.querySelectorAll('#sidebarNav a').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.chapter').forEach(chap => chap.classList.remove('active-chapter'));
+
+            // הוסף הדגשה לחדש
+            this.classList.add('active');
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.classList.add('active-chapter');
+            }
+        }
+    });
+});
+let isCompactView = true;
+
+const showAllButton = document.getElementById("showAllButton");
+const chapters = document.querySelectorAll(".chapter");
+const subContainers = document.querySelectorAll(".sub-chapter-container");
+
+showAllButton.addEventListener("click", () => {
+    isCompactView = !isCompactView;
+
+    if (isCompactView) {
+        showAllButton.textContent = "מעבר לדף המלא";
+
+        // במצב מקוצר – הסתרה מוחלטת של הכל
+        chapters.forEach(chap => chap.style.display = "none");
+        subContainers.forEach(container => container.style.display = "none");
+
+    } else {
+        showAllButton.textContent = "מעבר לתצוגה מקוצרת";
+
+        // במצב מלא – הצגה רק של פרקים, בלי תתי פרקים
+        chapters.forEach(chap => chap.style.display = "block");
+        subContainers.forEach(container => container.style.display = "none");
+    }
+});
+
+
+// אם לוחצים על כפתור בפרק בתצוגה מקוצרת – נפתח רק אותו
+document.querySelectorAll('#sidebarNav a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href').substring(1);
+
+        if (isCompactView) {
+            e.preventDefault();
+
+            chapters.forEach(chap => chap.style.display = "none");
+            subContainers.forEach(sub => sub.style.display = "none");
+
+            const targetChapter = document.getElementById(targetId);
+            const subContainer = targetChapter.nextElementSibling;
+
+            if (targetChapter && subContainer) {
+                targetChapter.style.display = "block";
+                subContainer.style.display = "block";
+                window.scrollTo({ top: targetChapter.offsetTop - 100, behavior: "smooth" });
+            }
+
+            // הדגשה
+            document.querySelectorAll('#sidebarNav a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        }
+    });
+});
+let isFullView = false;
+
+function setInitialView() {
+    // הסתר את כל הפרקים כברירת מחדל
+    document.querySelectorAll(".chapter").forEach(chap => chap.style.display = "none");
+    document.querySelectorAll(".sub-chapter-container").forEach(sub => sub.style.display = "none");
+}
+
+document.getElementById("toggleViewButton").addEventListener("click", () => {
+    isFullView = !isFullView;
+
+    if (isFullView) {
+        document.querySelectorAll(".chapter").forEach(chap => chap.style.display = "block");
+        document.querySelectorAll(".sub-chapter-container").forEach(sub => sub.style.display = "block");
+        document.getElementById("toggleViewButton").textContent = "מעבר לתצוגה מקוצרת";
+    } else {
+        setInitialView();
+        document.getElementById("toggleViewButton").textContent = "מעבר למצב מלא";
+    }
+});
+
+// בעת לחיצה על קישור בסרגל העליון במצב מקוצר
+document.querySelectorAll('#sidebarNav a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        if (!isFullView) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href').substring(1);
+            const chapter = document.getElementById(targetId);
+            const subContainer = chapter.nextElementSibling;
+
+            // אם פתוח – סגור אותו
+            const isAlreadyOpen = chapter.style.display === "block";
+
+            // סגור הכול
+            setInitialView();
+
+            if (!isAlreadyOpen) {
+                chapter.style.display = "block";
+                subContainer.style.display = "block";
+                window.scrollTo({ top: chapter.offsetTop - 100, behavior: "smooth" });
+            }
+
+            // נקה הדגשות והדגש נוכחי
+            document.querySelectorAll('#sidebarNav a').forEach(l => l.classList.remove('active'));
+            if (!isAlreadyOpen) this.classList.add('active');
+        }
+    });
+});
+function showContent() {
+    document.getElementById("loginContainer").style.display = "none";
+    document.getElementById("contentContainer").style.display = "block";
+    setInitialView(); // <- הוספת שורה זו
+}
+
+
+
+
 
     </script>
 </body>
 </html>
+
