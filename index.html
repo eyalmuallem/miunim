@@ -178,10 +178,56 @@
         <button onclick="checkLogin()">כניסה</button>
         <p id="errorMessage">שם משתמש או סיסמה שגויים</p>
     </div>
+    <div id="introContainer" style="
+    display: none;
+    max-width: 90%;
+    margin: 60px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    text-align: center;
+">
+    <h2 style="font-size: 1.4em;">ברוכים הבאים למערכת ניהול המיונים!</h2>
+
+    <!-- תמונה רספונסיבית מתחת לכותרת -->
+    <img src="https://media-hosting.imagekit.io/849b9dd3ce3e42bc/miunim.png?Expires=1838442994&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=JQByet9IXIC~cmpFga8fMzIkIYMabgCXlJQa67SIgJAZGgPLP~61UbqHPRuWTUXGH0AEnQWGPwsj5qdV2OK1iESVueAGNkI09NKSyFVuYYOfAcEfGqE9sSqlVf1ttXAxSO5ArQVvi9ajgZktiOJrA0UqkKeILi6zdblCRQN4UwL0DGQ-MqibEBqQ~S9A1zYQZpnDVbaJPNDGe~fNrrDSUcESiNNLuYk43fFrfab-XuSs9cl63ZSXdwgX8yfSYIoMw9x4ibpwJveF8--2kVDcAmSljQA5LyTFJ7OfwKIdavri9Q36jQ2bIuBW8DHs4tmfz9A69mxuyNnIO1~1hWb4uw__"
+         alt="לוגו"
+         style="width: 100%; max-width: 350px; margin: 20px auto; display: block;">
+
+    <p style="text-align: right; font-size: 0.95em; line-height: 1.5;">
+        המיונים ללהקות הצבאיות מתרחשים פעם בשנה וזו ממש זכות שנבחרת להיות אחראית עליהם. התהליך של המיונים הינו חוויה ייחודית במדור הפקות ותחומי האחריות וההתעסקות שאנחנו כמפיקי מיונים מבצעים נותנים כלים מאוד משמעותיים וחשיפה לתחומים מעניינים. שיהיה בהצלחה, בטוח שיהיה לך מעולה!
+    </p>
+
+    <ul style="text-align: right; font-size: 0.9em;">
+        <li>התוכן מסודר לפי פרקים ותתי פרקים</li>
+        <li>ניתן לסנן לפי חודשים</li>
+        <li>יש לעקוב אחר המשימות לפי תאריך</li>
+    </ul>
+
+    <p style="margin-top: 10px; font-weight: bold; font-size: 0.9em;">
+        כל התוכן נכתב ע״י המפיק האגדי רותם גוטלר אופיר
+    </p>
+
+    <button onclick="enterMainContent()" style="
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    ">
+        כניסה לדף הראשי
+    </button>
+</div>
+
     
 
     <!-- דף התוכן הראשי -->
-    <div id="contentContainer">
+<div id="contentContainer" style="display: none;">
     
         <div class="header-container">
             <img class="logo-right" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR54ryCD7eiD-RGgYDvUUgEenJDBQ3BiejDrw&s" alt="לוגו ימין">
@@ -224,6 +270,8 @@
              <div style="margin: 10px;">
   <button id="showAllButton" style="padding: 8px; border-radius: 8px;">מעבר לדף המלא</button>
 </div>
+<button onclick="setPage('intro')">חזרה לדף ביניים</button>
+
 <div id="monthFilterContainer" style="margin: 20px;">
     <button id="toggleMonthFilter" style="padding: 10px; border-radius: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
         סנן  
@@ -1388,6 +1436,53 @@ function showContent() {
     document.getElementById("contentContainer").style.display = "block";
     setInitialView(); // <- הוספת שורה זו
 }
+function checkLogin() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const correctPassword = generatePassword();
+
+    if (username === "hafakot610" && password === correctPassword) {
+        localStorage.setItem("isLoggedIn", "true");
+        showIntro(); // במקום showContent
+    } else {
+        document.getElementById("errorMessage").style.display = "block";
+    }
+}
+
+function showIntro() {
+    document.getElementById("loginContainer").style.display = "none";
+    document.getElementById("introContainer").style.display = "block";
+}
+
+function enterMainContent() {
+    document.getElementById("introContainer").style.display = "none";
+    document.getElementById("contentContainer").style.display = "block";
+    setInitialView();
+}
+<!-- שאר התוכן שלך -->
+
+
+function enterMainContent() {
+  document.getElementById('introContainer').style.display = 'none';
+  document.getElementById('contentContainer').style.display = 'block';
+}
+
+function returnToIntro() {
+  document.getElementById('contentContainer').style.display = 'none';
+  document.getElementById('introContainer').style.display = 'block';
+}
+
+function setPage(page) {
+  if (page === 'intro') {
+    document.getElementById('contentContainer').style.display = 'none';
+    document.getElementById('introContainer').style.display = 'block';
+  } else if (page === 'main') {
+    document.getElementById('introContainer').style.display = 'none';
+    document.getElementById('contentContainer').style.display = 'block';
+  }
+}
+
+
 
 
 
@@ -1396,4 +1491,3 @@ function showContent() {
     </script>
 </body>
 </html>
-
